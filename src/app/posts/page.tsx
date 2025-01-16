@@ -71,7 +71,7 @@ const Page = () => {
               >
                 <CardHeader>
                   <PostHeader userProfile={post.userId} />
-                  <Carousel className="w-[350px] h-[470px]">
+                  <Carousel className="w-[390px] h-[470px]">
                     <CarouselContent>
                       {post.postImg.map((img, i) => {
                         return (

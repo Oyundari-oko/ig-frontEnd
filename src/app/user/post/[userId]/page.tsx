@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { UserFollowers } from "@/component/UserFollowers";
 import { UserFollowing } from "@/component/UserFollowing";
 import { ChevronDown } from "lucide-react";
+import { UserRoundPlus } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -165,20 +166,31 @@ const Page = ({ params }: { params: Promise<{ userId: string }> }) => {
               ></UserFollowers>
             </div>
           </div>
-          <div className="pt-[30px] flex justify-evenly space-x-2">
+          <div className="pt-[30px] flex space-x-2">
             <div className="flex space-x-2">
               {myUserId === userId ? null : (
                 <button
-                  className=" bg-blue-800 rounded h-7 w-screen"
+                  className=" bg-blue-800 rounded h-7 w-[390px]"
                   onClick={() => follow()}
                 >
                   {isUserFollowed ? "unfollow" : "follow"}
                 </button>
               )}
-              {/* <UserRoundPlus
-                onClick={searchUser}
-                className="bg-blue-800 rounded h-7 w-[40px] "
-              ></UserRoundPlus> */}
+            </div>
+            <div className="space-x-1 flex justify-center">
+              {myUserId !== userId ? null : (
+                <button className=" bg-black rounded h-7 w-[190px] text-white border border-white">
+                  edit profile
+                </button>
+              )}
+              {myUserId !== userId ? null : (
+                <button className=" bg-black rounded h-7 w-[190px] text-white border border-white">
+                  share profile
+                </button>
+              )}
+              <UserRoundPlus
+                onClick={() => router.push("/iq_users")}
+              ></UserRoundPlus>
             </div>
           </div>
           <div className="pt-[20px] flex justify-start flex-wrap-reverse w-screen">
