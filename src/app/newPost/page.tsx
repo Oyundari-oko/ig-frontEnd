@@ -55,6 +55,9 @@ const Page = () => {
   const userId = decode.userId;
   const router = useRouter();
   const sharePost = async () => {
+    if (value === "") {
+      setValueError(true);
+    }
     const body = {
       caption: value,
       postImg: uploadedImages,
@@ -106,7 +109,7 @@ const Page = () => {
             );
           })}
         </div>
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center">
           <input
             value={value}
             onChange={(e) => setValue(String(e.target.value))}
@@ -114,12 +117,10 @@ const Page = () => {
             className="bg-black border border-gray-700 w-[300px]"
           />
           {valueError && (
-            <div className="text-red-600 font-sans">please write caption🥹</div>
+            <div className="text-red-600 font-sans text-sm">
+              please write caption🥹
+            </div>
           )}
-          {/* <Forward
-            onClick={post}
-            className="bg-blue-700 h-[35px] w-[30px]"
-          ></Forward> */}
         </div>
         <div className="flex justify-end">
           <Button
