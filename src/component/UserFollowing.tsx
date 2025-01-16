@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 type followingType = {
   _id: string;
@@ -38,6 +38,7 @@ export const UserFollowing = ({
   useEffect(() => {
     followingUsers();
   }, [userId]);
+  const router = useRouter();
   return (
     <div>
       <Dialog open={open} onOpenChange={(e) => setOpen(e)}>
@@ -55,10 +56,16 @@ export const UserFollowing = ({
                   </div>
 
                   <div className="flex flex-col" style={{ paddingTop: "15px" }}>
-                    <div className="text-white pt-[10px]">
+                    <div
+                      className="text-white pt-[10px]"
+                      onClick={() => router.push(`/user/post/${following._id}`)}
+                    >
                       {following.username}
                     </div>
-                    <div className="text-gray-500 text-sm">
+                    <div
+                      className="text-gray-500 text-sm"
+                      onClick={() => router.push(`/user/post/${following._id}`)}
+                    >
                       {following.email}
                     </div>
                   </div>

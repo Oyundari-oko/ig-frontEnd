@@ -6,6 +6,18 @@ import { Parent } from "@/component/Parent";
 import { jwtDecode } from "jwt-decode";
 import { UserFollowers } from "@/component/UserFollowers";
 import { UserFollowing } from "@/component/UserFollowing";
+import { ChevronDown } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type usersType = {
   _id: string;
@@ -27,7 +39,6 @@ const Page = ({ params }: { params: Promise<{ userId: string }> }) => {
   const [openUser, setOpenUse] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const { userId } = use(params);
-  const router = useRouter();
   const userProfile = async () => {
     const data = await fetch(
       `https://ig-backend-eop9.onrender.com/user/post/${userId}`
@@ -75,7 +86,7 @@ const Page = ({ params }: { params: Promise<{ userId: string }> }) => {
   useEffect(() => {
     userProfile();
   }, [userId]);
-
+  const router = useRouter();
   return (
     <Parent>
       <div className="h-screen">
@@ -86,7 +97,30 @@ const Page = ({ params }: { params: Promise<{ userId: string }> }) => {
                 <div className="text-white flex justify-start font-bold text-xl pl-[22px]">
                   {profile?.username}
                 </div>
-                {/* <ChevronDown className="flex justify-center items-end"></ChevronDown> */}
+                <AlertDialog>
+                  <AlertDialogTrigger className="bg-black">
+                    <ChevronDown></ChevronDown>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="bg-black">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>ADD INSTAGRAM ACCOUNT</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Are you absolutely sure?😊
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="font-bold">
+                        Cancel
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        className="font-bold"
+                        onClick={() => router.push("/signup")}
+                      >
+                        Continue
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
 
               <div>
